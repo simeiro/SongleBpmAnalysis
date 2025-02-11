@@ -1,1 +1,6 @@
 .env
+
+# 研究とは関係のないファイル
+a.py
+make_json.py
+vocadays.py

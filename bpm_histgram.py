@@ -26,9 +26,10 @@ def main():
     for beat in beats:
         bpms.append(beat['bpm'])
     
-    plt.hist(bpms, bins='auto')
+    plt.hist(bpms, bins=10)
     plt.xlabel('BPM')
     plt.ylabel('Frequency')
+    plt.ylim(0, 700)
     plt.title('Histogram of Data')
     plt.show()
     

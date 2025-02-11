@@ -37,6 +37,11 @@ def get_playlist_video_urls(playlist_url):
             maxResults=100,
             pageToken=next_page_token
         ).execute()
+        for item in playlist_items_response['items']:
+            
+            video_id = item['snippet']['resourceId']['videoId']
+            print(video_id)
+            video_urls.append(video_id)
 
         for item in playlist_items_response['items']:
             youtube_base_url = 'https://www.youtube.com/watch?v='
@@ -48,7 +53,7 @@ def get_playlist_video_urls(playlist_url):
                     json = vocadb_response.json()
                     for item in json['items']:
                         for pv in item['pvs']:
-                            if pv['service'] == 'NicoNicoDouga':
+                            if pv['service'] == 'Youtube':
                                 video_urls.append(pv['url'])
                 if vocadb_response.status_code == 404:
                     video_urls.append(youtube_base_url + video_id)
@@ -64,7 +69,7 @@ def get_playlist_video_urls(playlist_url):
 def main():
     """url_list.txtに書き込みを行う"""
 
-    playlist_url = 'https://www.youtube.com/watch?v=19y8YTbvri8&list=PLTOj1BFS6AhN4Fz80WvdMu4cdOFZ1oW1q'
+    playlist_url = 'https://www.youtube.com/watch?v=p3ymzi70Gjs&list=PLAaqbXSZIG6xmT6noHxHA2YD65cOXRZBS'
     urls = get_playlist_video_urls(playlist_url)
 
     print(urls)
